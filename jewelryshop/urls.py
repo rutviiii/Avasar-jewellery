@@ -1,15 +1,16 @@
 
 from django.contrib import admin
 from django.urls import path, include
-
+from store.views import create_admin
 from django.conf import settings
 from django.conf.urls.static import static
-from store.views import create_admin
+
 
 urlpatterns = [
+    path('create-admin/', create_admin),
     path('admin/', admin.site.urls),
     path('', include('store.urls')),
-    path('create-admin/', create_admin),
+    
 ]
 
 # To display images
