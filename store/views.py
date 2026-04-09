@@ -8,6 +8,7 @@ from django.views import View
 import decimal
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator # for Class Based Views
+from django.http import HttpResponse
 
 
 # Create your views here.
@@ -203,9 +204,15 @@ def orders(request):
 def shop(request):
     return render(request, 'store/shop.html')
 
-
-
-
-
 def test(request):
     return render(request, 'store/test.html')
+
+def create_admin(request):
+    if not User.objects.filter(username='admin123').exists():
+        User.objects.create_superuser(
+            username='admin123',
+            email='admin@gmail.com',
+            password='admin123'
+        )
+        return HttpResponse("Superuser created successfully")
+    return HttpResponse("Superuser already exists")
