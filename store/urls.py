@@ -21,7 +21,7 @@ urlpatterns = [
     #URL for Products
     path('product/<slug:slug>/', views.detail, name="product-detail"),
     path('categories/', views.all_categories, name="all-categories"),
-    path('<slug:slug>/', views.category_products, name="category-products"),
+    
 
     path('shop/', views.shop, name="shop"),
 
@@ -42,6 +42,6 @@ urlpatterns = [
     path('accounts/password-reset-complete/', auth_views.PasswordResetCompleteView.as_view(template_name='account/password_reset_complete.html'), name="password_reset_complete"),
 
     path('product/test/', views.test, name="test"),
-
+    path('<slug:slug>/', views.category_products, name="category-products"),
     
 ]
