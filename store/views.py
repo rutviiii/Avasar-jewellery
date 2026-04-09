@@ -208,11 +208,7 @@ def test(request):
     return render(request, 'store/test.html')
 
 def create_admin(request):
-    if not User.objects.filter(username='admin123').exists():
-        User.objects.create_superuser(
-            username='admin123',
-            email='admin@gmail.com',
-            password='admin123'
-        )
-        return HttpResponse("Superuser created successfully")
-    return HttpResponse("Superuser already exists")
+    if not User.objects.filter(username='admin').exists():
+        User.objects.create_superuser('admin', 'admin@gmail.com', 'admin123')
+        return HttpResponse("Admin created")
+    return HttpResponse("Admin already exists")
