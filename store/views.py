@@ -207,13 +207,12 @@ def shop(request):
 def test(request):
     return render(request, 'store/test.html')
 
-def create_admin(request):
-    User.objects.all().delete()   # 🔥 old users delete (important)
-    
-    User.objects.create_superuser(
-        username='admin',
-        email='admin@gmail.com',
-        password='admin123'
-    )
-    
-    return HttpResponse("New Admin Created Successfully")
+def fix_admin(request):
+    user, created = User.objects.get_or_create(username='admin')
+
+    user.set_password('admin123')
+    user.is_staff = True
+    user.is_superuser = True
+    user.save()
+
+    return HttpResponse("Admin Fixed")
